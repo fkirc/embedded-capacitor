@@ -18,6 +18,8 @@ With only minimal changes, this project provides the following improvements over
 - Fix Android-crashes related to unneeded plugins:
 - Disable splashscreen-plugin by default to speedup launches (you can still enable it).
 
+To convince yourself, here are the differences between this project and Ionic's Capacitor: https://github.com/fkirc/embedded-capacitor/pull/1/files
+
 ## Installation
 
 Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
