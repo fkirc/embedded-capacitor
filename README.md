@@ -3,8 +3,8 @@
 This project enables an "embedded usage" of https://capacitorjs.com/ within existing native apps.
 It exists because of the following frustrating situation:
 
-- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X [https://github.com/ionic-team/capacitor/pull/3405].
-- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution [https://github.com/ionic-team/capacitor/issues/4343].
+- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X: https://github.com/ionic-team/capacitor/pull/3405
+- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution: https://github.com/ionic-team/capacitor/issues/4343
 
 For the time being, I consider Capacitor 2.X as more stable for embedded usage.
 Therefore, this project only works with Capacitor 2.X.
@@ -16,10 +16,42 @@ With only minimal changes, this project provides the following improvements over
 - Configure custom URL-paths for Android's `BridgeFragment`: https://github.com/ionic-team/capacitor/pull/3405
 - Configure custom URL-paths for iOS `CAPBridgeViewController`: https://github.com/ionic-team/capacitor/issues/4370, https://github.com/ionic-team/capacitor/issues/3106
 - Make iOS `CAPBridgeViewController` extensible to better support embedded usage: https://github.com/ionic-team/capacitor/pull/1972
-- Speedup Android launch time: https://github.com/ionic-team/capacitor/issues/2992
-- Fix Android crashes triggered by unneeded plugins:
+- Remove implicit plugin-registration to speedup Android launch time: https://github.com/ionic-team/capacitor/issues/2992
+- Fix Android-crashes related to unneeded plugins:
 
 ## Installation
+
+To use this project, replace your dependencies to `@capacitor/android` or `@capacitor/ios` as follows:
+
+`npm uninstall @capacitor/android`
+`npm install capacitor-embedded-android`
+
+Afterwards, follow the Android/iOS-specific instructions below.
+
+### Embedded Android
+
+Firstly, change your `capacitor.settings.gradle` as follows:
+
+```
+include ':capacitor-android'
+project(':capacitor-android').projectDir = new File('../node_modules/capacitor-embedded-android/capacitor')
+```
+
+Once this is working, I recommend to subclass `BridgeFragment` for embedded usage:
+
+```
+import android.os.Bundle
+import com.getcapacitor.BridgeFragment
+import com.getcapacitor.plugin.Device
+
+class MyBridgeFragment : BridgeFragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        super.addPlugin(Device::class.java) // Add default-plugins because they are no longer registered implicitly!
+        super.setUrlPath("/#embedded_feature_1") // Set an URL-path for your embedded usage
+    }
+}
+```
 
 ---
 
