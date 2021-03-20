@@ -23,26 +23,24 @@ To convince yourself, here are the differences between this project and Ionic's 
 ## Installation
 
 Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
-Once you finished a regular Capacitor 2.X setup, replace your dependencies to `@capacitor/android` or `@capacitor/ios` as follows:
+See https://capacitorjs.com/ for regular Capacitor instructions.
+Once you finished a regular Capacitor 2.X setup, follow the Android/iOS-specific instructions below.
+
+### Embedded Android
+
+Replace your `@capacitor/android` package as follows:
 
 `npm uninstall @capacitor/android`  
 `npm install capacitor-embedded-android`  
 
-`npm uninstall @capacitor/ios`  
-`npm install capacitor-embedded-ios`  
-
-Afterwards, follow the Android/iOS-specific instructions below.
-
-### Embedded Android
-
-Firstly, change your `capacitor.settings.gradle` to point to the replaced package:
+Next, change your `capacitor.settings.gradle` to point to the replaced package:
 
 ````Groovy
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/capacitor-embedded-android/capacitor')
 ```` 
 
-Once this is working, I recommend to subclass `BridgeFragment` for embedded usage:
+Finally, I recommend to subclass `BridgeFragment` for embedded usage:
 
 ````Kotlin
 import android.os.Bundle
@@ -59,14 +57,19 @@ class MyBridgeFragment : BridgeFragment() {
 
 ### Embedded iOS
 
-Firstly, change your `Podfile` to point to the replaced package:
+Replace your `@capacitor/ios` package as follows:
+
+`npm uninstall @capacitor/ios`  
+`npm install capacitor-embedded-ios`  
+
+Next, change your `Podfile` to point to the replaced package:
 
 ````
   pod 'Capacitor', :path => '../../node_modules/capacitor-embedded-ios'
   pod 'CapacitorCordova', :path => '../../node_modules/capacitor-embedded-ios'
 ````
 
-Once this is working, I recommend to subclass `CAPBridgeViewController` for embedded usage:
+Finally, I recommend to subclass `CAPBridgeViewController` for embedded usage:
 
 ````Swift
 public class MyCAPBridgeViewController: CAPBridgeViewController {
