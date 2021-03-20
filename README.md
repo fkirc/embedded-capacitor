@@ -37,14 +37,14 @@ Afterwards, follow the Android/iOS-specific instructions below.
 
 Firstly, change your `capacitor.settings.gradle` to point to the replaced package:
 
-```
+````Groovy
 include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/capacitor-embedded-android/capacitor')
-```
+```` 
 
 Once this is working, I recommend to subclass `BridgeFragment` for embedded usage:
 
-```Kotlin
+````Kotlin
 import android.os.Bundle
 import com.getcapacitor.BridgeFragment
 import com.getcapacitor.plugin.Device
@@ -55,7 +55,7 @@ class MyBridgeFragment : BridgeFragment() {
         super.setUrlPath("/#embedded_feature_1") // Set an URL-path for your embedded usage
     }
 }
-```
+````
 
 ### Embedded iOS
 
@@ -71,7 +71,7 @@ Once this is working, I recommend to subclass `CAPBridgeViewController` for embe
 ````Swift
 public class MyCAPBridgeViewController: CAPBridgeViewController {
     public override func loadView() {
-        super.setUrlPath(path: "/#embedded_feature_1")
+        super.setUrlPath(path: "/#embedded_feature_1") // Set an URL-path for your embedded usage
         super.loadView()
     }
 }
