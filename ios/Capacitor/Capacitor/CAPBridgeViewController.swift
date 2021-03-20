@@ -8,13 +8,13 @@ import WebKit
 import Cordova
 
 open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScriptMessageHandler, WKUIDelegate, WKNavigationDelegate {
-
+  
   private var webView: WKWebView?
-
+  
   public var bridgedWebView: WKWebView? {
     return webView
   }
-
+  
   public var bridgedViewController: UIViewController? {
     return self
   }
@@ -23,7 +23,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
   private var allowNavigationConfig: [String]?
   private var basePath: String = ""
   private let assetsFolder = "public"
-
+  
   private enum WebViewLoadingState {
     case unloaded
     case initialLoad(isOpaque: Bool)
