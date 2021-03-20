@@ -23,23 +23,29 @@ To convince yourself, here are the differences between this project and Ionic's 
 ## Installation
 
 Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
-Once you finished a regular Capacitor 2.X setup, follow the Android/iOS-specific instructions below.
-
-### Embedded Android
-
-Replace your `@capacitor/android` package as follows:
+Once you finished a regular Capacitor 2.X setup, replace your `@capacitor/android` or `@capacitor/ios` packages as follows:
 
 `npm uninstall @capacitor/android`  
 `npm install capacitor-embedded-android`  
 
-Next, change your `capacitor.settings.gradle` to point to the replaced package:
+`npm uninstall @capacitor/ios`  
+`npm install capacitor-embedded-ios`  
 
-````Groovy
-include ':capacitor-android'
-project(':capacitor-android').projectDir = new File('../node_modules/capacitor-embedded-android/capacitor')
-```` 
+Next, create a symlink from the original package-locations to the new package-locations:
 
-Finally, I recommend to subclass `BridgeFragment` for embedded usage:
+`ln -s "$PWD/node_modules/capacitor-embedded-android/" node_modules/@capacitor/android`  
+`ln -s "$PWD/node_modules/capacitor-embedded-ios/" node_modules/@capacitor/ios`  
+
+Those symlinks need to be created every time when `node_modules` is created.
+Therefore, I recommend adding the following `preinstall`-script to your `package.json`:
+
+
+
+Finally, follow the Android/iOS-specific instructions below.
+
+### Embedded Android
+
+For Android, I recommend to subclass `BridgeFragment` for embedded usage:
 
 ````Kotlin
 import android.os.Bundle
@@ -56,19 +62,7 @@ class MyBridgeFragment : BridgeFragment() {
 
 ### Embedded iOS
 
-Replace your `@capacitor/ios` package as follows:
-
-`npm uninstall @capacitor/ios`  
-`npm install capacitor-embedded-ios`  
-
-Next, change your `Podfile` to point to the replaced package:
-
-````
-  pod 'Capacitor', :path => '../../node_modules/capacitor-embedded-ios'
-  pod 'CapacitorCordova', :path => '../../node_modules/capacitor-embedded-ios'
-````
-
-Finally, I recommend to subclass `CAPBridgeViewController` for embedded usage:
+For iOS, I recommend to subclass `CAPBridgeViewController` for embedded usage:
 
 ````Swift
 public class MyCAPBridgeViewController: CAPBridgeViewController {
@@ -78,11 +72,6 @@ public class MyCAPBridgeViewController: CAPBridgeViewController {
     }
 }
 ````
-
-## Limitations
-
-Currently, `cap sync/cap update` does not work with this package, but `cap copy` still works.
-This might be fixed in the future, but I don't expect that this is a huge deal for experienced mobile developers.
 
 ---
 
