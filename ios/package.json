@@ -1,5 +1,5 @@
 {
-  "name": "@capacitor/ios",
+  "name": "capacitor-embedded-ios",
   "version": "2.4.7",
   "description": "Capacitor: cross-platform mobile apps with the web",
   "homepage": "https://capacitor.ionicframework.com/",

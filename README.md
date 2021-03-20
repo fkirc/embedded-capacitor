@@ -3,8 +3,8 @@
 This project enables an "embedded usage" of https://capacitorjs.com/ within existing native apps.
 It exists because of the following frustrating situation:
 
-- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X: https://github.com/ionic-team/capacitor/pull/3405
-- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution: https://github.com/ionic-team/capacitor/issues/4343, https://github.com/ionic-team/capacitor/issues/4370
+- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X [[3405](https://github.com/ionic-team/capacitor/pull/3405)]
+- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution [[4343](https://github.com/ionic-team/capacitor/issues/4343), [4370](https://github.com/ionic-team/capacitor/issues/4370)]
 
 For the time being, I consider Capacitor 2.X as more stable for embedded usage.
 Therefore, this project only works with Capacitor 2.X.
@@ -13,24 +13,28 @@ Therefore, this project only works with Capacitor 2.X.
 
 With only minimal changes, this project provides the following improvements over Ionic's Capacitor 2.X:
 
-- Configure custom URL-paths for Android's `BridgeFragment`: https://github.com/ionic-team/capacitor/pull/3405
-- Configure custom URL-paths for iOS `CAPBridgeViewController`: https://github.com/ionic-team/capacitor/issues/3106
-- Make iOS `CAPBridgeViewController` extensible to better support embedded usage: https://github.com/ionic-team/capacitor/pull/1972
-- Remove implicit plugin-registration to speedup Android launch time: https://github.com/ionic-team/capacitor/issues/2992
+- Configure custom URL-paths for Android's `BridgeFragment`: [3405](https://github.com/ionic-team/capacitor/pull/3405)
+- Configure custom URL-paths for iOS `CAPBridgeViewController`: [3106](https://github.com/ionic-team/capacitor/issues/3106)
+- Make iOS `CAPBridgeViewController` extensible to better support embedded usage: [1972](https://github.com/ionic-team/capacitor/pull/1972)
+- Remove implicit plugin-registrations to speedup Android launch time: [2992](https://github.com/ionic-team/capacitor/issues/2992)
 - Fix Android-crashes related to unneeded plugins:
 
 ## Installation
 
-To use this project, replace your dependencies to `@capacitor/android` or `@capacitor/ios` as follows:
+Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
+Once you finished a regular Capacitor 2.X setup, replace your dependencies to `@capacitor/android` or `@capacitor/ios` as follows:
 
 `npm uninstall @capacitor/android`  
 `npm install capacitor-embedded-android`  
+
+`npm uninstall @capacitor/ios`  
+`npm install capacitor-embedded-ios`  
 
 Afterwards, follow the Android/iOS-specific instructions below.
 
 ### Embedded Android
 
-Firstly, change your `capacitor.settings.gradle` as follows:
+Firstly, change your `capacitor.settings.gradle` to point to the replaced package:
 
 ```
 include ':capacitor-android'
@@ -52,6 +56,31 @@ class MyBridgeFragment : BridgeFragment() {
     }
 }
 ```
+
+### Embedded iOS
+
+Firstly, change your `Podfile` to point to the replaced package:
+
+````
+  pod 'Capacitor', :path => '../../node_modules/capacitor-embedded-ios'
+  pod 'CapacitorCordova', :path => '../../node_modules/capacitor-embedded-ios'
+````
+
+Once this is working, I recommend to subclass `CAPBridgeViewController` for embedded usage:
+
+````Swift
+public class MyCAPBridgeViewController: CAPBridgeViewController {
+    public override func loadView() {
+        super.setUrlPath(path: "/#embedded_feature_1")
+        super.loadView()
+    }
+}
+````
+
+## Limitations
+
+Currently, `cap sync/cap update` does not work with this package, but `cap copy` still works.
+This might be fixed in the future, but I don't expect that this is a huge deal for experienced mobile developers.
 
 ---
 
