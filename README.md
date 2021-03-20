@@ -13,11 +13,10 @@ Therefore, this project only works with Capacitor 2.X.
 
 With only minimal changes, this project provides the following improvements over Ionic's Capacitor 2.X:
 
-- Configure custom URL-paths for Android's `BridgeFragment`: [3405](https://github.com/ionic-team/capacitor/pull/3405)
-- Configure custom URL-paths for iOS `CAPBridgeViewController`: [3106](https://github.com/ionic-team/capacitor/issues/3106)
+- Configure custom URL-paths for Android/iOS: [3405](https://github.com/ionic-team/capacitor/pull/3405), [3106](https://github.com/ionic-team/capacitor/issues/3106)
 - Make iOS `CAPBridgeViewController` extensible to better support embedded usage: [1972](https://github.com/ionic-team/capacitor/pull/1972)
-- Remove implicit plugin-registrations to speedup Android launch time: [2992](https://github.com/ionic-team/capacitor/issues/2992)
 - Fix Android-crashes related to unneeded plugins:
+- Disable splashscreen-plugin by default to speedup launches (you can still enable it).
 
 ## Installation
 
@@ -51,7 +50,6 @@ import com.getcapacitor.plugin.Device
 class MyBridgeFragment : BridgeFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        super.addPlugin(Device::class.java) // Add default-plugins because they are no longer registered implicitly!
         super.setUrlPath("/#embedded_feature_1") // Set an URL-path for your embedded usage
     }
 }
