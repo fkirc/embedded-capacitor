@@ -524,9 +524,9 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
   }
 
   open func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-
+    
     let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .alert)
-
+    
     alertController.addTextField { (textField) in
       textField.text = defaultText
     }
@@ -541,9 +541,9 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
     }))
 
     alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-
+      
       completionHandler(nil)
-
+      
     }))
 
     self.present(alertController, animated: true, completion: nil)
@@ -591,7 +591,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
 
   /**
    * Add hooks to detect failed HTTP requests
-
+    
    func webView(webView: WKWebView,
    didFailProvisionalNavigation navigation: WKNavigation!,
    withError error: NSError) {
@@ -604,5 +604,5 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
    }
    }
    */
-
+  
 }
