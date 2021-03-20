@@ -15,7 +15,7 @@ With only minimal changes, this project provides the following improvements over
 
 - Configure custom URL-paths for Android/iOS: [3405](https://github.com/ionic-team/capacitor/pull/3405), [3106](https://github.com/ionic-team/capacitor/issues/3106)
 - Make iOS `CAPBridgeViewController` extensible to better support embedded usage: [1972](https://github.com/ionic-team/capacitor/pull/1972)
-- Fix Android-crashes related to unneeded plugins:
+- Fix Android-crashes related to unneeded plugins: [4379](https://github.com/ionic-team/capacitor/issues/4379)
 - Disable splashscreen-plugin by default to speedup launches (you can still enable it).
 
 To convince yourself, here are the differences between this project and Ionic's Capacitor: https://github.com/fkirc/embedded-capacitor/pull/1/files
