@@ -23,7 +23,6 @@ To convince yourself, here are the differences between this project and Ionic's 
 ## Installation
 
 Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
-See https://capacitorjs.com/ for regular Capacitor instructions.
 Once you finished a regular Capacitor 2.X setup, follow the Android/iOS-specific instructions below.
 
 ### Embedded Android
