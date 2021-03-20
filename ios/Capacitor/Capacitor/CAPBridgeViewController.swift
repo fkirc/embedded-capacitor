@@ -199,7 +199,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
       webViewLoadingState = .initialLoad(isOpaque: webView.isOpaque)
       webView.isOpaque = false
     }
-
+    
     let fullStartPath = URL(fileURLWithPath: assetsFolder).appendingPathComponent(startDir).appendingPathComponent("index")
     if Bundle.main.path(forResource: fullStartPath.relativePath, ofType: "html") == nil {
       fatalLoadError()
@@ -286,7 +286,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
   open func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DecidePolicyForNavigationAction.name()), object: navigationAction)
     let navUrl = navigationAction.request.url!
-
+    
     /*
      * Give plugins the chance to handle the url
      */
@@ -308,7 +308,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
         }
       }
     }
-
+    
     if let allowNavigation = allowNavigationConfig, let requestHost = navUrl.host {
       for pattern in allowNavigation {
         if matchHost(host: requestHost, pattern: pattern.lowercased()) {
@@ -591,7 +591,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
 
   /**
    * Add hooks to detect failed HTTP requests
-    
+   
    func webView(webView: WKWebView,
    didFailProvisionalNavigation navigation: WKNavigation!,
    withError error: NSError) {
