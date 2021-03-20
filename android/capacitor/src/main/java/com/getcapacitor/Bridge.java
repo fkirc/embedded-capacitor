@@ -415,11 +415,7 @@ public class Bridge {
    * Register our core Plugin APIs
    */
   private void registerAllPlugins() {
-    /**
-     * For performance and stability reasons, it is better to only register the plugins that
-     * your app is actually using.
-     */
-    /*this.registerPlugin(App.class);
+    this.registerPlugin(App.class);
     this.registerPlugin(Accessibility.class);
     this.registerPlugin(BackgroundTask.class);
     this.registerPlugin(Browser.class);
@@ -437,11 +433,11 @@ public class Bridge {
     this.registerPlugin(Photos.class);
     this.registerPlugin(PushNotifications.class);
     this.registerPlugin(Share.class);
-    this.registerPlugin(SplashScreen.class);
+    //this.registerPlugin(SplashScreen.class);
     this.registerPlugin(StatusBar.class);
     this.registerPlugin(Storage.class);
     this.registerPlugin(com.getcapacitor.plugin.Toast.class);
-    this.registerPlugin(com.getcapacitor.plugin.WebView.class);*/
+    this.registerPlugin(com.getcapacitor.plugin.WebView.class);
 
     for (Class<? extends Plugin> pluginClass : this.initialPlugins) {
       this.registerPlugin(pluginClass);
