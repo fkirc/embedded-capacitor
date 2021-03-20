@@ -1,3 +1,28 @@
+# Embedded Capacitor
+
+This project enables an "embedded usage" of https://capacitorjs.com/ within existing native apps.
+It exists because of the following frustrating situation:
+
+- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X [https://github.com/ionic-team/capacitor/pull/3405].
+- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution [https://github.com/ionic-team/capacitor/issues/4343].
+
+For the time being, I consider Capacitor 2.X as more stable for embedded usage.
+Therefore, this project only works with Capacitor 2.X.
+
+## Improvements over Ionic's Capacitor
+
+With only minimal changes, this project provides the following improvements over Ionic's Capacitor 2.X:
+
+- Configure custom URL-paths for Android's `BridgeFragment`: https://github.com/ionic-team/capacitor/pull/3405
+- Configure custom URL-paths for iOS `CAPBridgeViewController`: https://github.com/ionic-team/capacitor/issues/4370, https://github.com/ionic-team/capacitor/issues/3106
+- Make iOS `CAPBridgeViewController` extensible to better support embedded usage: https://github.com/ionic-team/capacitor/pull/1972
+- Speedup Android launch time: https://github.com/ionic-team/capacitor/issues/2992
+- Fix Android crashes triggered by unneeded plugins:
+
+## Installation
+
+---
+
 <br />
 <p align="center">
   <img src="https://user-images.githubusercontent.com/236501/83809024-9da80580-a66a-11ea-8a1d-090fe6f8b01e.png" width="372" height="70" /><br />
