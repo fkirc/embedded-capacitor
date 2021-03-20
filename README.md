@@ -55,7 +55,6 @@ For Android, I recommend to subclass `BridgeFragment` for embedded usage:
 ````Kotlin
 import android.os.Bundle
 import com.getcapacitor.BridgeFragment
-import com.getcapacitor.plugin.Device
 
 class MyBridgeFragment : BridgeFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
