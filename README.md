@@ -45,6 +45,7 @@ Therefore, I recommend adding a `postinstall`-script to your `package.json`:
   },
 ````
 
+Optionally, I recommend the [capsafe](https://github.com/fkirc/capacitor-build-safety) tool to increase safety and traceability of your Capacitor-apps.
 
 Finally, follow the Android/iOS-specific instructions below.
 
