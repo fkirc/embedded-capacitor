@@ -37,8 +37,13 @@ Next, create symlinks from the original package-locations to the new package-loc
 `ln -s "$PWD/node_modules/capacitor-embedded-ios/" node_modules/@capacitor/ios`  
 
 Those symlinks need to be created every time when `node_modules` is created.
-Therefore, I recommend adding the following `preinstall`-script to your `package.json`:
+Therefore, I recommend adding a `postinstall`-script to your `package.json`:
 
+````
+  "scripts": {
+    "postinstall": "ln -s \"$PWD/node_modules/capacitor-embedded-android/\" node_modules/@capacitor/android && ln -s \"$PWD/node_modules/capacitor-embedded-ios/\" node_modules/@capacitor/ios"
+  },
+````
 
 
 Finally, follow the Android/iOS-specific instructions below.
