@@ -42,6 +42,11 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
   // Construct the Capacitor runtime
   public var bridge: CAPBridge?
   private var handler: CAPAssetHandler?
+    
+  private var urlPath: String?
+  open func setUrlPath(path: String) {
+    self.urlPath = path
+  }
 
   override open func loadView() {
     let configUrl = Bundle.main.url(forResource: "config", withExtension: "xml")
@@ -202,6 +207,9 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
 
     hostname = bridge!.config.getString("server.url") ?? "\(bridge!.getLocalUrl())"
     allowNavigationConfig = bridge!.config.getValue("server.allowNavigation") as? Array<String>
+    if let urlPath = self.urlPath {
+        hostname! += urlPath
+    }
 
     if bridge!.isDevMode() && bridge!.config.getString("server.url") != nil {
       let toastPlugin = bridge!.getOrLoadPlugin(pluginName: "Toast") as? CAPToastPlugin
