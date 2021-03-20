@@ -30,12 +30,12 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
     case subsequentLoad
   }
   private var webViewLoadingState = WebViewLoadingState.unloaded
-
+  
   private var isStatusBarVisible = true
   private var statusBarStyle: UIStatusBarStyle = .default
   private var statusBarAnimation: UIStatusBarAnimation = .slide
   @objc public var supportedOrientations: Array<Int> = []
-
+  
   @objc public var startDir = ""
   @objc public var config: String?
 
@@ -56,7 +56,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
     guard let startPath = self.getStartPath() else {
       return
     }
-
+    
     setStatusBarDefaults()
     setScreenOrientationDefaults()
     let capConfig = CAPConfig(self.config)
@@ -77,7 +77,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
     o.add(self, name: "bridge")
 
     webViewConfiguration.userContentController = o
-
+    
     configureWebView(configuration: webViewConfiguration)
 
     if let appendUserAgent = (capConfig.getValue("ios.appendUserAgent") as? String) ?? (capConfig.getValue("appendUserAgent") as? String) {
@@ -101,9 +101,9 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
     }
     webView?.configuration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
     view = webView
-
+    
     setKeyboardRequiresUserInteraction(false)
-
+    
     bridge = CAPBridge(self, o, capConfig, specifiedScheme)
 
     if let backgroundColor = (bridge!.config.getValue("ios.backgroundColor") as? String) ?? (bridge!.config.getValue("backgroundColor") as? String) {
@@ -114,7 +114,7 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
       webView?.backgroundColor = UIColor.systemBackground
       webView?.scrollView.backgroundColor = UIColor.systemBackground
     }
-
+    
     if let overrideUserAgent = (bridge!.config.getValue("ios.overrideUserAgent") as? String) ?? (bridge!.config.getValue("overrideUserAgent") as? String) {
       webView?.customUserAgent = overrideUserAgent
     }
@@ -177,13 +177,13 @@ open class CAPBridgeViewController: UIViewController, CAPBridgeDelegate, WKScrip
 
   func printLoadError() {
     let fullStartPath = URL(fileURLWithPath: assetsFolder).appendingPathComponent(startDir)
-
+    
     CAPLog.print("⚡️  ERROR: Unable to load \(fullStartPath.relativePath)/index.html")
     CAPLog.print("⚡️  This file is the root of your web app and must exist before")
     CAPLog.print("⚡️  Capacitor can run. Ensure you've run capacitor copy at least")
     CAPLog.print("⚡️  or, if embedding, that this directory exists as a resource directory.")
   }
-
+  
   func fatalLoadError() -> Never {
     printLoadError()
     exit(1)
