@@ -31,7 +31,7 @@ Once you finished a regular Capacitor 2.X setup, replace your `@capacitor/androi
 `npm uninstall @capacitor/ios`  
 `npm install capacitor-embedded-ios`  
 
-Next, create a symlink from the original package-locations to the new package-locations:
+Next, create symlinks from the original package-locations to the new package-locations:
 
 `ln -s "$PWD/node_modules/capacitor-embedded-android/" node_modules/@capacitor/android`  
 `ln -s "$PWD/node_modules/capacitor-embedded-ios/" node_modules/@capacitor/ios`  
