@@ -4,7 +4,7 @@ This project enables an "embedded usage" of https://capacitorjs.com/ within exis
 It exists because of the following frustrating situation:
 
 - Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X: https://github.com/ionic-team/capacitor/pull/3405
-- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution: https://github.com/ionic-team/capacitor/issues/4343
+- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution: https://github.com/ionic-team/capacitor/issues/4343, https://github.com/ionic-team/capacitor/issues/4370
 
 For the time being, I consider Capacitor 2.X as more stable for embedded usage.
 Therefore, this project only works with Capacitor 2.X.
@@ -14,7 +14,7 @@ Therefore, this project only works with Capacitor 2.X.
 With only minimal changes, this project provides the following improvements over Ionic's Capacitor 2.X:
 
 - Configure custom URL-paths for Android's `BridgeFragment`: https://github.com/ionic-team/capacitor/pull/3405
-- Configure custom URL-paths for iOS `CAPBridgeViewController`: https://github.com/ionic-team/capacitor/issues/4370, https://github.com/ionic-team/capacitor/issues/3106
+- Configure custom URL-paths for iOS `CAPBridgeViewController`: https://github.com/ionic-team/capacitor/issues/3106
 - Make iOS `CAPBridgeViewController` extensible to better support embedded usage: https://github.com/ionic-team/capacitor/pull/1972
 - Remove implicit plugin-registration to speedup Android launch time: https://github.com/ionic-team/capacitor/issues/2992
 - Fix Android-crashes related to unneeded plugins:
