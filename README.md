@@ -23,8 +23,8 @@ With only minimal changes, this project provides the following improvements over
 
 To use this project, replace your dependencies to `@capacitor/android` or `@capacitor/ios` as follows:
 
-`npm uninstall @capacitor/android`
-`npm install capacitor-embedded-android`
+`npm uninstall @capacitor/android`  
+`npm install capacitor-embedded-android`  
 
 Afterwards, follow the Android/iOS-specific instructions below.
 
@@ -39,7 +39,7 @@ project(':capacitor-android').projectDir = new File('../node_modules/capacitor-e
 
 Once this is working, I recommend to subclass `BridgeFragment` for embedded usage:
 
-```
+```Kotlin
 import android.os.Bundle
 import com.getcapacitor.BridgeFragment
 import com.getcapacitor.plugin.Device
