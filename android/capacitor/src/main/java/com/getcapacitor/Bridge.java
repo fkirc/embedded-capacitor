@@ -136,7 +136,7 @@ public class Bridge {
    * @param context
    * @param webView
    */
-  public Bridge(Activity context, WebView webView, List<Class<? extends Plugin>> initialPlugins, CordovaInterfaceImpl cordovaInterface, PluginManager pluginManager, CordovaPreferences preferences, JSONObject config) {
+  public Bridge(Activity context, WebView webView, List<Class<? extends Plugin>> initialPlugins, CordovaInterfaceImpl cordovaInterface, PluginManager pluginManager, CordovaPreferences preferences, JSONObject config, String urlPath) {
     this.context = context;
     this.webView = webView;
     this.webViewClient = new BridgeWebViewClient(this);
@@ -169,10 +169,10 @@ public class Bridge {
     // Register our core plugins
     this.registerAllPlugins();
 
-    this.loadWebView();
+    this.loadWebView(urlPath);
   }
 
-  private void loadWebView() {
+  private void loadWebView(String urlPath) {
     appUrlConfig = this.getServerUrl();
     String[] appAllowNavigationConfig = this.config.getArray("server.allowNavigation");
 
@@ -206,6 +206,9 @@ public class Bridge {
       if (!scheme.equals(Bridge.CAPACITOR_HTTP_SCHEME) && !scheme.equals(CAPACITOR_HTTPS_SCHEME)) {
         appUrl += "/";
       }
+    }
+    if (urlPath != null) {
+      appUrl += urlPath;
     }
 
     final boolean html5mode = this.config.getBoolean("server.html5mode", true);

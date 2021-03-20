@@ -80,7 +80,7 @@ public class BridgeActivity extends AppCompatActivity {
 
     pluginManager = mockWebView.getPluginManager();
     cordovaInterface.onCordovaInit(pluginManager);
-    bridge = new Bridge(this, webView, initialPlugins, cordovaInterface, pluginManager, preferences, this.config);
+    bridge = new Bridge(this, webView, initialPlugins, cordovaInterface, pluginManager, preferences, this.config, null);
 
     if (savedInstanceState != null) {
       bridge.restoreInstanceState(savedInstanceState);
