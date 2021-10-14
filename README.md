@@ -1,3 +1,9 @@
+# Deprecation Notice
+
+This package is deprecated because of https://ionic.io/portals.
+"Portals" provides a better dev-experience and is actively supported by Ionic and newer Capacitor-versions.
+__________
+
 # Embedded Capacitor
 
 This project enables an "embedded usage" of https://capacitorjs.com/ within existing native apps.
