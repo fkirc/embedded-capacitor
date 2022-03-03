@@ -45,6 +45,11 @@ public class BridgeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private String urlPath;
+    public void setUrlPath(String urlPath) {
+        this.urlPath = urlPath;
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -72,7 +77,7 @@ public class BridgeFragment extends Fragment {
      * Load the WebView and create the Bridge
      */
     protected void load(Bundle savedInstanceState) {
-        Logger.debug("Starting BridgeActivity");
+        Logger.debug("Starting BridgeFragment");
 
         Bundle args = getArguments();
         String startDir = null;
@@ -97,7 +102,7 @@ public class BridgeFragment extends Fragment {
             preferences = new CordovaPreferences();
         }
 
-        bridge = new Bridge(this.getActivity(), webView, initialPlugins, cordovaInterface, pluginManager, preferences, config);
+        bridge = new Bridge(this.getActivity(), webView, initialPlugins, cordovaInterface, pluginManager, preferences, config, urlPath);
 
         if (startDir != null) {
             bridge.setServerAssetPath(startDir);

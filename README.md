@@ -1,3 +1,91 @@
+# Deprecation Notice
+
+This package is deprecated in favor of https://ionic.io/portals.
+"Portals" provides a better dev-experience and is actively supported by Ionic and newer Capacitor-versions.
+__________
+
+# Embedded Capacitor
+
+This project enables an "embedded usage" of https://capacitorjs.com/ within existing native apps.
+It exists because of the following frustrating situation:
+
+- Capacitor 2.X provides only bad support for "embedded usage", but promised to deliver with Capacitor 3.X [[3405](https://github.com/ionic-team/capacitor/pull/3405)]
+- Capacitor 3.X deliberately destroyed "embedded usage", but promised to deliver an embedded closed-source-solution [[4343](https://github.com/ionic-team/capacitor/issues/4343), [4370](https://github.com/ionic-team/capacitor/issues/4370)]
+
+For the time being, I consider Capacitor 2.X as more stable for embedded usage.
+Therefore, this project only works with Capacitor 2.X.
+
+## Improvements over Ionic's Capacitor
+
+With only minimal changes, this project provides the following improvements over Ionic's Capacitor 2.X:
+
+- Configure custom URL-paths for Android/iOS: [3405](https://github.com/ionic-team/capacitor/pull/3405), [3106](https://github.com/ionic-team/capacitor/issues/3106)
+- Make iOS `CAPBridgeViewController` extensible to better support embedded usage: [1972](https://github.com/ionic-team/capacitor/pull/1972)
+- Fix Android-crashes related to unneeded plugins: [4379](https://github.com/ionic-team/capacitor/issues/4379)
+- Disable splashscreen-plugin by default to speedup launches (you can still enable it).
+
+To convince yourself, here are the differences between this project and Ionic's Capacitor: https://github.com/fkirc/embedded-capacitor/pull/1/files
+
+## Installation
+
+Before you install this project, ensure that regular Capacitor 2.X is working with your project (e.g. it should work in "fullscreen-mode").
+Once you finished a regular Capacitor 2.X setup, replace your `@capacitor/android` or `@capacitor/ios` packages as follows:
+
+`npm uninstall @capacitor/android`  
+`npm install capacitor-embedded-android`  
+
+`npm uninstall @capacitor/ios`  
+`npm install capacitor-embedded-ios`  
+
+Next, create symlinks from the original package-locations to the new package-locations:
+
+`ln -s "$PWD/node_modules/capacitor-embedded-android/" node_modules/@capacitor/android`  
+`ln -s "$PWD/node_modules/capacitor-embedded-ios/" node_modules/@capacitor/ios`  
+
+Those symlinks need to be created every time when `node_modules` is created.
+Therefore, I recommend adding a `postinstall`-script to your `package.json`:
+
+````
+  "scripts": {
+    "postinstall": "ln -s \"$PWD/node_modules/capacitor-embedded-android/\" node_modules/@capacitor/android && ln -s \"$PWD/node_modules/capacitor-embedded-ios/\" node_modules/@capacitor/ios"
+  },
+````
+
+Optionally, I recommend the [capsafe](https://github.com/fkirc/capacitor-build-safety) tool to increase safety and traceability of your Capacitor-apps.
+
+Finally, follow the Android/iOS-specific instructions below.
+
+### Embedded Android
+
+For Android, I recommend to subclass `BridgeFragment` for embedded usage:
+
+````Kotlin
+import android.os.Bundle
+import com.getcapacitor.BridgeFragment
+
+class MyBridgeFragment : BridgeFragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        super.setUrlPath("/#embedded_feature_1") // Set an URL-path for your embedded usage
+    }
+}
+````
+
+### Embedded iOS
+
+For iOS, I recommend to subclass `CAPBridgeViewController` for embedded usage:
+
+````Swift
+public class MyCAPBridgeViewController: CAPBridgeViewController {
+    public override func loadView() {
+        super.setUrlPath(path: "/#embedded_feature_1") // Set an URL-path for your embedded usage
+        super.loadView()
+    }
+}
+````
+
+---
+
 <br />
 <p align="center">
   <img src="https://user-images.githubusercontent.com/236501/83809024-9da80580-a66a-11ea-8a1d-090fe6f8b01e.png" width="372" height="70" /><br />
