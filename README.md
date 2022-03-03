@@ -1,6 +1,6 @@
 # Deprecation Notice
 
-This package is deprecated because of https://ionic.io/portals.
+This package is deprecated in favor of https://ionic.io/portals.
 "Portals" provides a better dev-experience and is actively supported by Ionic and newer Capacitor-versions.
 __________
 
